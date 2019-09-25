@@ -31,59 +31,41 @@ public class GenericLib {
 	
 	public  WebDriver driver;
 	
-	public  WebDriver OpenApp(String BrowserName, String url){
-		
-		fn_LaunchBrowser(BrowserName);
-		fn_OpenURL(url);
-		return driver;
+	
+		        public void setup(String browser) throws Exception{
+		//Check if parameter passed from TestNG is 'firefox'
+		if(browser.equalsIgnoreCase("firefox")){
+		//create firefox instance
+			System.setProperty("webdriver.firefox.marionette", "com.Dsci.insurancedomain/TestBrowsers/geckodriver.exe");
+			driver = new FirefoxDriver();
 		}
-		public  void fn_OpenURL(String url){
-		driver.get(url);
-		driver.manage().window().maximize();
+		//Check if parameter passed as 'chrome'
+		else if(browser.equalsIgnoreCase("chrome")){
+			//set path to chromedriver.exe
+			System.setProperty("webdriver.chrome.driver","com.Dsci.insurancedomain/TestBrowsers/chromedriver.exe");
+			//create chrome instance
+			driver = new ChromeDriver();
 		}
-		 
-		public  WebDriver fn_LaunchBrowser(String browsername){
-		if(browsername=="CH"){
-			 try { 
-				 System.out.println("CHROME BROWSER");
-		    	  System.setProperty("webdriver.chrome.driver",System.getProperty("user.dir")+ "com.Dsci.insurancedomain/TestBrowsers/chromedriver.exe");
-					ChromeOptions options = new ChromeOptions();
-					options.addArguments("chrome.switches","--disable-extensions");
-					new DesiredCapabilities();
-					DesiredCapabilities caps = DesiredCapabilities.chrome();
-					caps.setCapability(ChromeOptions.CAPABILITY, options);
-					
-					Map<String, Object> prefs = new HashMap<String, Object>();
-				
-					prefs.put("profile.default_content_settings.popups", 0);
-					prefs.put("download.prompt_for_download", "false");
-					
-					prefs.put("credentials_enable_service", false);
-					prefs.put("profile.password_manager_enabled", false);
-					options.setExperimentalOption("prefs", prefs);
-			
-					driver = new ChromeDriver(caps);
-					driver.manage().window().maximize();
-					//driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS); 
-					return driver;	
-		      } 
-
-		      catch (Exception ex) { 
-		        ex.printStackTrace();
-		    	  throw new RuntimeException
-		              ("couldnt create chrome driver"); 
-		      } 
-		}else if(browsername=="FF"){
-			System.setProperty("webdriver.Firefox.driver", "TestBrowsers\\geckodriver.exe");
-
-		driver= new FirefoxDriver();
-		}else if(browsername=="IE"){
-		System.setProperty("webdriver.ie.driver", "TestBrowsers\\IEDriverServer.exe");
-		driver= new InternetExplorerDriver();
+		//Check if parameter passed as 'Edge'
+				else if(browser.equalsIgnoreCase("Edge")){
+					//set path to Edge.exe
+					System.setProperty("webdriver.edge.driver","com.Dsci.insurancedomain/TestBrowsers/MicrosoftWebDriver.exe");
+					//create Edge instance
+					driver = new EdgeDriver();
+				}
+				else if(browser.equalsIgnoreCase("IE")){
+					//set path to Edge.exe
+					System.setProperty("webdriver.ie.driver",".\\IEDriverServer.exe");
+					//create Edge instance
+					driver = new EdgeDriver();
+				}
+		else{
+			//If no browser passed throw exception
+			throw new Exception("Browser is not correct");
 		}
-		driver.manage().timeouts().implicitlyWait(80, TimeUnit.SECONDS);
-		return driver;
-		}
+		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+	}
+	
 	
 	
 
