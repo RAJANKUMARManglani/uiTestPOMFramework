@@ -1,0 +1,129 @@
+##################################### Worker compensation ##############################################################
+BussinessLookUpPageHeader = //div[contains(text(),'Business Lookup')]
+SearchInput = //div[@class='ant-select-search__field__wrap']//input[@type='text']
+ListSearchBox= //li[@class='ant-select-dropdown-menu-item ant-select-dropdown-menu-item-active']
+AppassistContactDetailsWidget = //div[@class='ApplicationAssiststyles__DetailsContainer-sc-1n8sf1h-7 gFSUjM']//div[1]//div[1]//div[1]//i[1]
+AppassistTaxwidget = //div[@class='ApplicationAssiststyles__DetailsContainer-sc-1n8sf1h-7 gFSUjM']//div[2]//div[1]//div[1]//i[1]
+SuiteFloorTextBox = //input[@id='UIF09']
+YearstartedTextbox = //input[@id='UIF05']
+YourFirstNameText = //input[@id='UIF128']
+YourLastNameText = //input[@id='UIF129']
+NoofEmployeesText = //input[@id='UIF127']
+LegalEntityauto = //div[@id='UIF64']//div[@class='ant-select-selection__rendered']
+LegalEntityTypeSelected = //div[contains(@title,'Partnership')]
+BussinessLookUpContinueButton = //button[@id='button_continue_Business_Details']
+TellUsAboutBussinessHeader = //div[@class='PageHeaderstyles__Title-sc-197uhrm-1 jYSTPL']
+AppAssistQuestion1 = //input[@id='recommendationWizard-no']
+PolicyRecommendationContinueButton = //button[@id='button_continue_Policy_Recommendation']
+ChooseYourPolicyHeader = //div[contains(text(),'Choose Your Policy')]
+UnselectBussinessOwnerPolicy = //div[@id='Business Owners Policy']
+SelectWorkercompensationpolicy = //div[@id='Workers Compensation']
+ChooseYourPolicyContinueButton = //button[@id='button_continue_POLICY_SELECTION_PAGE']
+PolicyLevelHeader = //div[contains(text(),'Policy Level')]
+PolicyLevelAns1 = //input[@id='UIF35-no']
+PolicyLevelAns2 = //input[@id='UIF38-yes']
+PolicyLevelAns21 = //input[@id='UIF39']
+PolicyLevelAns22 = //input[@id='UIF141']
+PolicyLevelAns3 = //input[@id='UIF40-no']
+PolicyLevelAns4 = //input[@id='UIF41-no']
+PolicyLevelAns5 = //input[@id='UIF70-yes']
+PolicyLevelAns51 = //input[@id='UIF71']
+PolicyLevelContinueButton = button_continue_Workers_Compensation_Underwriting
+CompanyofficerHeader = //div[(text()='Company Officers')]
+OfficerNameText = UIF65
+OfficerCoveredAns= UIF66-no
+CompanyOfficerContinuebutton = companyOfficers_continue_button
+MonthlyPayrollsubheader = //div[contains(text(),'Monthly Payroll')]
+MonthlyPayrolltextbox = UIF67
+NoofProdEmployeeText = UIF37
+clericalPayrollTextbox = UIF68
+NoofClearicalEmployeeText = UIF107
+CompanyPayrollContinuebutton = button_continue_Company_Details
+AdditionalInterstHeader = //div[text()='Additional Interest']
+AdditionalInterstQuestion = AdditionalInterest-no
+AdditionalContinuebutton = button_continue_Additional_Interest
+CoveragePricingheader = //div[text()='Coverages & Pricing']
+EffectiveDate = //input[@placeholder='mm / dd / yyyy']
+WorkercompensationHeader = //h3[@class='Pricingstyles__SubTitle-sc-1ytw5j1-11 gIgWbu']
+PriceofPolicy = //span[text()='$718.00']
+PricingpageContinue = button_continue_PRICING_PAGE
+ChoosePaymentplan = //div[text()='Pay in Full']/parent::div
+PricingAmountPaymentDetailsPage = //p[@class='PricingReviewstyles__PriceAmount-sc-1y0acfe-6 dBRRGy']
+PaymentdetailsContinueButton = button_continue_PROPOSAL_PAGE
+ReviewPageHeader = //div[contains(text(),'Electronic Delivery Disclosure and Consent')]
+ReviewPageDisclosurename = //input[@id='disclosureName']
+AcknowledgeCheckbox = //input[@value='disclosureAcknowledge_Yes']
+AcknowledgeContinueButton  = button_continue_Acknowledgements_&_Disclosures
+SelectedPlanHeader = //div[@class='Paymentstyles__ConfirmationMessage-g9zkyw-7 diubQy']
+FinalPaymentAssertAmount = //div[contains(text(),'$718.00')]
+PolicyNameAssert = //div[text()='Workers Compensation']
+
+##################################### Business Owners Policy ##############################################################
+UnderwrittingQuestion1 = UIF19-no
+UnderwrittingQuestion2 = UIF28-no
+UnderwrittingQuestion3 = UIF29-no
+UnderwrittingQuestion4 = UIF31-yes
+UnderwrittingQuestion5 = UIF32-yes
+UnderwrittingQuestion6 = UIF106-no
+Underwrittingyears =  //div[contains(@class,'ant-select-selection--single')]
+UnderwrittingMorethan5years = UIF33-LongerThanFive
+UnderwrittingContinueButton = button_continue_Underwriting
+BusinessOwnersUnderwritingQuestion1 = UIF18-no
+BusinessOwnersUnderwritingQuestion2 = UIF21-no
+BusinessOwnersUnderwritingQuestion3 = UIF22-no
+BusinessOwnersUnderwritingQuestion4 = UIF24-no
+BusinessOwnersUnderwritingQuestion5 = UIF25-no
+BusinessOwnersUnderwritingQuestion6 = UIF142-no
+BusinessOwnersUnderwritingQuestion7 = //div[@id='UIF33']//div[contains(@class,'ant-select-selection__rendered')]
+BusinessOwnersUnderwritingQuestion7Select3plus = UIF33-threePlus
+BusinessOwnersUnderwritingQuestion8 = //div[@id='UIF34']//div[contains(@class,'ant-select-selection--single')]
+BusinessOwnersUnderwritingQuestion8Selectdaily= UIF34-daily
+BusinessOwnersUnderwritinContinue = button_continue_Business_Owners_Policy_Underwriting
+BopLoc&BuildingsAnnualsale = UIF57
+BopLoc&BuildingsQuestion1 = UIF59-no
+BopLoc&BuildingsQuestion2 = UIF60-no
+BopLoc&BuildingsQuestion3 = UIF62-no
+LocationsContinuebutton = //button[@id='locations_continue_button']
+BuildingDescriptionText = buildingDescription
+BuildingValueofequipment = UIF45
+BopYearBuilt = UIF139
+BopLoc&BuildingsQuestion4 = //div[@id='UIF42']//div[contains(@class,'ant-select-selection--single')]
+BopLoc&BuildingsQuestion4select = UIF42-joistedMasonry
+BopLoc&BuildingsQuestion5 = UIF51-no
+BopLoc&BuildingsQuestion6 = UIF48-no
+BopLoc&BuildingsQuestion7 = UIF52-no
+BopLoc&BuildingsQuestion8 = UIF53-yes
+BopLoc&BuildingsQuestion9 = UIF54-yes
+BopLoc&BuildingsQuestion91 = UIF55-no
+BopLoc&BuildingsContinue = buildings_continue_button
+BopLoc&BuildingsFinalContinue = button_continue_Business_Owners_Policy_-_Locations_&_Buildings
+
+
+
+
+
+Emailaddress = //input[@id='reg_email']
+CalenderPickerDateeffective = //input[@placeholder='mm / dd / yyyy']
+EffectiveDate = //div[@class='ant-calendar-date' and @xpath='1']
+ZipCode = //input[@id='reg_zipcode']
+Recapacha = //div[@class='recaptcha-checkbox-checkmark']
+RegistrationContinue = button_registration_continue
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
