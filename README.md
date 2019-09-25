@@ -1,2 +1,2 @@
-# uiTestPOMFramework
-uiTestPOMFramework
+# CurrentFramework
+CurrentFramework
