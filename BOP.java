@@ -231,7 +231,10 @@ public class BOP extends GenericLib{
                     System.out.println("Click on location & building continue button");
                     
 
-
+  // Call common function for completing the purchase
+                    ProjectspecificFunctions obj = new ProjectspecificFunctions();
+                    obj.additionalInterstTillPayment();
+                    
 
 
 
