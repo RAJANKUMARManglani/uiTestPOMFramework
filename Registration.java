@@ -4,9 +4,6 @@ import org.testng.annotations.Test;
 
 import com.Dsci.ReadPropertyFile.ReadPropertyFile;
 import com.Dsci.SuiteBase.GenericLib;
-
-import org.testng.annotations.BeforeTest;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 
@@ -17,16 +14,16 @@ import org.testng.annotations.BeforeClass;
 
 public class Registration extends GenericLib{
  
-	 WebDriver driver;
+	public static WebDriver driver;
 @BeforeClass
-  public void beforeTest() {
+  public void beforeTest() throws Exception {
 	  System.out.println("before test");
-	  OpenApp("CH","https://solutions.mckinsey.com/dsci-qa/ef1d3125-0d84-4906-8a92-c2eb40f2c342/" );
-	  driver= new GenericLib().driver;
+	  setup("chrome");
+	  driver.get("https://solutions.mckinsey.com/dsci-qa/ef1d3125-0d84-4906-8a92-c2eb40f2c342/");
   }
   
   @Test
-  public void RegistrationTest() throws IOException, Throwable 
+  public void RegistrationTest() throws IOException, FileNotFoundException 
   {
 	  
 	  //Enter emailaddress 
