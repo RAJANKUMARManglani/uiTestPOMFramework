@@ -1,7 +1,7 @@
 ##################################### Worker compensation ##############################################################
 BussinessLookUpPageHeader = //div[contains(text(),'Business Lookup')]
 SearchInput = //div[@class='ant-select-search__field__wrap']//input[@type='text']
-ListSearchBox= //li[@class='ant-select-dropdown-menu-item ant-select-dropdown-menu-item-active']
+ListSearchBoxSelect= //li[contains(text(),'Gateaux, Speer Boulevard, Denver, CO, USA')]
 AppassistContactDetailsWidget = //div[@class='ApplicationAssiststyles__DetailsContainer-sc-1n8sf1h-7 gFSUjM']//div[1]//div[1]//div[1]//i[1]
 AppassistTaxwidget = //div[@class='ApplicationAssiststyles__DetailsContainer-sc-1n8sf1h-7 gFSUjM']//div[2]//div[1]//div[1]//i[1]
 SuiteFloorTextBox = //input[@id='UIF09']
@@ -100,6 +100,7 @@ BopLoc&BuildingsFinalContinue = button_continue_Business_Owners_Policy_-_Locatio
 
 
 
+##################################### Registration page ##############################################################
 
 
 Emailaddress = //input[@id='reg_email']
