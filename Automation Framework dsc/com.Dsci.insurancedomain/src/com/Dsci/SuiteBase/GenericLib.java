@@ -16,11 +16,10 @@ import org.openqa.selenium.StaleElementReferenceException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
-import org.openqa.selenium.chrome.ChromeOptions;
+import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
-import org.openqa.selenium.remote.DesiredCapabilities;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
@@ -30,34 +29,33 @@ import org.openqa.selenium.support.ui.WebDriverWait;
 public class GenericLib {
 	
 	public  WebDriver driver;
-	
-	
-		        public void setup(String browser) throws Exception{
+	Logger log;
+	public void setup(String browser) throws Exception{
 		//Check if parameter passed from TestNG is 'firefox'
 		if(browser.equalsIgnoreCase("firefox")){
 		//create firefox instance
-			System.setProperty("webdriver.firefox.marionette", "com.Dsci.insurancedomain/TestBrowsers/geckodriver.exe");
+			System.setProperty("webdriver.gecko.driver", "TestBrowsers/geckodriver.exe");
 			driver = new FirefoxDriver();
 		}
 		//Check if parameter passed as 'chrome'
 		else if(browser.equalsIgnoreCase("chrome")){
 			//set path to chromedriver.exe
-			System.setProperty("webdriver.chrome.driver","com.Dsci.insurancedomain/TestBrowsers/chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver","TestBrowsers/chromedriver.exe");
 			//create chrome instance
 			driver = new ChromeDriver();
 		}
 		//Check if parameter passed as 'Edge'
 				else if(browser.equalsIgnoreCase("Edge")){
 					//set path to Edge.exe
-					System.setProperty("webdriver.edge.driver","com.Dsci.insurancedomain/TestBrowsers/MicrosoftWebDriver.exe");
+					System.setProperty("webdriver.edge.driver","TestBrowsers/MicrosoftWebDriver.exe");
 					//create Edge instance
 					driver = new EdgeDriver();
 				}
 				else if(browser.equalsIgnoreCase("IE")){
 					//set path to Edge.exe
-					System.setProperty("webdriver.ie.driver",".\\IEDriverServer.exe");
+					System.setProperty("webdriver.ie.driver","TestBrowsers/IEDriverServer.exe");
 					//create Edge instance
-					driver = new EdgeDriver();
+					driver = new InternetExplorerDriver();
 				}
 		else{
 			//If no browser passed throw exception
@@ -66,10 +64,7 @@ public class GenericLib {
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
 	}
 	
-	
-	
 
-	private Logger log = LoggerHelper.getLogger(GenericLib.class);
 
 	
 	/**
