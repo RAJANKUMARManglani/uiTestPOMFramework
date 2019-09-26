@@ -11,35 +11,34 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
 
 import com.Dsci.ReadPropertyFile.ReadPropertyFile;
 import com.Dsci.SuiteBase.GenericLib;
 import com.Dsci.SuiteBase.JavascriptHelper;
+import com.Dsci.SuiteBase.ProjectspecificFunctions;
 
 public class BOP extends GenericLib{
-	
-	
-
 
 	public String ExpectedPage1header = "Tell us about your business";
 	public String ExpectedPage2header = "Choose Your Policy";
-	   public static WebDriver driver;
-	
 
+		 WebDriver driver;
+	    @BeforeMethod
 
-  @BeforeTest
-  public void beforeTest() {
-	// Launch the browser and open the url
-		  OpenApp("CH","https://solutions.mckinsey.com/dsci-qa/ef1d3125-0d84-4906-8a92-c2eb40f2c342?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5paXN0MjcxMUBnbWFpbC5jb20iLCJ0ZW5hbnQiOiJlZjFkMzEyNS0wZDg0LTQ5MDYtOGE5Mi1jMmViNDBmMmMzNDIiLCJzY29wZSI6Ik1BR0lDX0xJTksiLCJpYXQiOjE1NjkxNzM0NzcsImV4cCI6MTU2OTQzMjY3N30.TAam28TXAFnCHn8-9C90jkwmkRM9sQr_foRgOwJoK_s" );
-	      System.out.print("App url is launched in chrome browser");
-  }
-  
+	  public void setUp() throws Exception {
+		  setup("chrome");
+			driver= new GenericLib().driver;
+
+			  driver.get("https://solutions.mckinsey.com/dsci-qa/ef1d3125-0d84-4906-8a92-c2eb40f2c342?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhamFubTI3MS4xQGdtYWlsLmNvbSIsInRlbmFudCI6ImVmMWQzMTI1LTBkODQtNDkwNi04YTkyLWMyZWI0MGYyYzM0MiIsInNjb3BlIjoiTUFHSUNfTElOSyIsImlhdCI6MTU2OTQ5NTI0MSwiZXhwIjoxNTY5NzU0NDQxfQ.QhpgyXmQu84V-QTCEEXndhHAbzhNDUywfo_M5hKxEC4");
+	  }
   @Test
   public void BOPTest() throws FileNotFoundException, IOException 
+  
   {
-	  // Click on continue
-      WebElement  BussinesslookupContinue =	getElementByXpath(ReadPropertyFile.ReadElementObjectRepo("BussinessLookUpContinueButton"));
-      BussinesslookupContinue.click();
+	// Call common function for Bussinesslook up page
+			ProjectspecificFunctions common = new ProjectspecificFunctions();
+			common.Bussinesslookup();
 
       // Select No for Question 1 in Tell us about your business
       
@@ -168,6 +167,81 @@ public class BOP extends GenericLib{
                     getElementByXpath(ReadPropertyFile.ReadElementObjectRepo("LocationsContinuebutton")).click();
                     System.out.println("Click on continue button in buildings section");
                     
+                    // Enter Building description
+                    getElementById(ReadPropertyFile.ReadElementObjectRepo("BuildingDescriptionText")).sendKeys("coffee shop");
+                    System.out.println("Enter  Building description");
+                    
+                    // Enter the Value of business equipment (best estimate)
+                    getElementById(ReadPropertyFile.ReadElementObjectRepo("BuildingValueofequipment")).sendKeys("100000");
+                    System.out.println("Enter the Value of business equipment");
+                    
+                    // Select construction type as joisted masonry
+                    getElementByXpath(ReadPropertyFile.ReadElementObjectRepo("BopLoc&BuildingsQuestion4")).click();
+                    getElementById(ReadPropertyFile.ReadElementObjectRepo("BopLoc&BuildingsQuestion4select")).click();
+                    System.out.println("Select construction type as joisted masonry");
+                    
+                    // enter the year built
+                    getElementById(ReadPropertyFile.ReadElementObjectRepo("BopYearBuilt")).sendKeys("2016");
+                    System.out.println("enter the year built as 2016");
+                    
+                    // select no for Is this building owned by your business?
+                    WebElement BopLocBuildingsQuestion5 =    getElementById(ReadPropertyFile.ReadElementObjectRepo("BopLoc&BuildingsQuestion5"));
+                    js1.scrollToElement(BopLocBuildingsQuestion5);
+                    BopLocBuildingsQuestion5.click();
+                    System.out.println("select no for Is this building owned by your business?");
+
+                    
+                    // select no for Do you want coverage in the event your coolers break down and your product is spoiled?
+                    WebElement BopLocBuildingsQuestion6 =    getElementById(ReadPropertyFile.ReadElementObjectRepo("BopLoc&BuildingsQuestion6"));
+                    js1.scrollToElement(BopLocBuildingsQuestion6);
+                    BopLocBuildingsQuestion6.click();
+                    System.out.println("select no for Do you want coverage in the event your coolers break down and your product is spoiled?");
+                    
+                    // Select No for Do you occupy the entire building?
+                    WebElement BopLocBuildingsQuestion7 =    getElementById(ReadPropertyFile.ReadElementObjectRepo("BopLoc&BuildingsQuestion7"));
+                    js1.scrollToElement(BopLocBuildingsQuestion7);
+                    BopLocBuildingsQuestion7.click();
+                    System.out.println("Select No for Do you occupy the entire building?");
+                    
+                    // Select yes for Do you have a fire suppression sprinkler system that covers at least 50% of your space?
+                    WebElement BopLocBuildingsQuestion8 =    getElementById(ReadPropertyFile.ReadElementObjectRepo("BopLoc&BuildingsQuestion8"));
+                    js1.scrollToElement(BopLocBuildingsQuestion8);
+                    BopLocBuildingsQuestion8.click();
+                    System.out.println("Select yes for Do you have a fire suppression sprinkler system that covers at least 50% of your space?");
+                    
+                    //select yes for Is there an alarm system?
+                    WebElement BopLocBuildingsQuestion9 =    getElementById(ReadPropertyFile.ReadElementObjectRepo("BopLoc&BuildingsQuestion9"));
+                    js1.scrollToElement(BopLocBuildingsQuestion9);
+                    BopLocBuildingsQuestion9.click();
+                    System.out.println("Select yes for Is there an alarm system?");
+                    
+                    //Select No for Does the alarm system ring at an offsite location that is monitored by a 3rd party?
+                    WebElement BopLocBuildingsQuestion91 =    getElementById(ReadPropertyFile.ReadElementObjectRepo("BopLoc&BuildingsQuestion91"));
+                    js1.scrollToElement(BopLocBuildingsQuestion91);
+                    BopLocBuildingsQuestion91.click();
+                    System.out.println("Select No for Does the alarm system ring at an offsite location that is monitored by a 3rd party?");
+                    
+                    // click on Building continue button
+                    getElementById(ReadPropertyFile.ReadElementObjectRepo("BopLoc&BuildingsContinue")).click();;
+                    System.out.println("click on Building continue button");
+                    
+                    // Click on location & building continue button
+                    getElementById(ReadPropertyFile.ReadElementObjectRepo("BopLoc&BuildingsFinalContinue")).click();;
+                    System.out.println("Click on location & building continue button");
+                    
+                    // Call common function for completing the purchase
+                    ProjectspecificFunctions obj = new ProjectspecificFunctions();
+                    obj.additionalInterstTillPayment();
+                    
+                    
+                    
+                    
+
+
+
+
+
+
                     
 
                     
