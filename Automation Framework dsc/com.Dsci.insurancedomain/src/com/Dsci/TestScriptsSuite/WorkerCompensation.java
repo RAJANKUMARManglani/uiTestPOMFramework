@@ -6,6 +6,8 @@ import org.testng.Assert;
 import com.Dsci.ReadPropertyFile.ReadPropertyFile;
 import com.Dsci.SuiteBase.GenericLib;
 import com.Dsci.SuiteBase.JavascriptHelper;
+import com.Dsci.SuiteBase.ProjectspecificFunctions;
+
 import org.testng.annotations.BeforeTest;
 
 import java.io.FileNotFoundException;
@@ -14,6 +16,7 @@ import java.util.concurrent.TimeUnit;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.testng.annotations.AfterTest;
+import org.testng.annotations.BeforeMethod;
 
 public class WorkerCompensation extends GenericLib{
 	public String ExpectedPage1header = "Tell us about your business";
@@ -21,53 +24,23 @@ public class WorkerCompensation extends GenericLib{
 	public String ExpectedPage3header = "Policy Level";
 	public String ExpectedPage4header = "Company Officers" ;
 	public String ExpectedPage5header = "Coverages & Pricing" ;
-    public static WebDriver driver;
- 
 
-@BeforeTest
-  public void beforeTest() {
-	  
-	  // Launch the browser and open the url
-	  OpenApp("CH","https://solutions.mckinsey.com/dsci-qa/ef1d3125-0d84-4906-8a92-c2eb40f2c342?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5paXN0MjcxMUBnbWFpbC5jb20iLCJ0ZW5hbnQiOiJlZjFkMzEyNS0wZDg0LTQ5MDYtOGE5Mi1jMmViNDBmMmMzNDIiLCJzY29wZSI6Ik1BR0lDX0xJTksiLCJpYXQiOjE1NjkxNzM0NzcsImV4cCI6MTU2OTQzMjY3N30.TAam28TXAFnCHn8-9C90jkwmkRM9sQr_foRgOwJoK_s" );
-      System.out.print("App url is launched in chrome browser");
-  }
+	 WebDriver driver;
+   @BeforeMethod
+
+ public void setUp() throws Exception {
+	  setup("chrome");
+		driver= new GenericLib().driver;
+
+	  driver.get("https://solutions.mckinsey.com/dsci-qa/ef1d3125-0d84-4906-8a92-c2eb40f2c342?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhamFubTI3MS4xQGdtYWlsLmNvbSIsInRlbmFudCI6ImVmMWQzMTI1LTBkODQtNDkwNi04YTkyLWMyZWI0MGYyYzM0MiIsInNjb3BlIjoiTUFHSUNfTElOSyIsImlhdCI6MTU2OTQ5NTI0MSwiZXhwIjoxNTY5NzU0NDQxfQ.QhpgyXmQu84V-QTCEEXndhHAbzhNDUywfo_M5hKxEC4");
+ }
 
 	@Test
 	  public void WorkerCompensationTest() throws FileNotFoundException, IOException 
 	{
-		               //Enter suite 
-                       WebElement  suite =	getElementByXpath(ReadPropertyFile.ReadElementObjectRepo("SuiteFloorTextBox"));
-                       suite.clear();
-                       suite.sendKeys("2nd Floor");
- 
-                        // Enter Year started
-                       WebElement  Yearstarted =	getElementByXpath(ReadPropertyFile.ReadElementObjectRepo("YearstartedTextbox"));
-                       Yearstarted.clear();
-                       Yearstarted.sendKeys("2013");  
-                       
-                         // Enter Your First name
-                       WebElement  FirstName =	getElementByXpath(ReadPropertyFile.ReadElementObjectRepo("YourFirstNameText"));
-                       FirstName.clear();
-                       FirstName.sendKeys("John");  
-                        // Enter Your Last name      
-                       WebElement  LastName =	getElementByXpath(ReadPropertyFile.ReadElementObjectRepo("YourLastNameText"));
-                       LastName.clear();
-                       LastName.sendKeys("Kimo"); 
-                        // Enter No of employees
-                       WebElement  NoOfEmployees =	getElementByXpath(ReadPropertyFile.ReadElementObjectRepo("NoofEmployeesText"));
-                       NoOfEmployees.clear();
-                       NoOfEmployees.sendKeys("15"); 
-                       
-                        // Enter the Partnership
-                       WebElement  Legalentity =	getElementByXpath(ReadPropertyFile.ReadElementObjectRepo("LegalEntityauto"));
-                       Legalentity.clear();
-                       Legalentity.sendKeys("Partnership");  
-                       //Select legal entity
-                       WebElement  SelectPartnership =	getElementByXpath(ReadPropertyFile.ReadElementObjectRepo("LegalEntityTypeSelected"));
-                       SelectPartnership.click();
-                       // Click on continue
-                       WebElement  BussinesslookupContinue =	getElementByXpath(ReadPropertyFile.ReadElementObjectRepo("BussinessLookUpContinueButton"));
-                       BussinesslookupContinue.click();
+		// Call common function for Bussinesslook up page
+		ProjectspecificFunctions common = new ProjectspecificFunctions();
+		common.Bussinesslookup();
   
                        // Select No for Question 1 in Tell us about your business
                        
