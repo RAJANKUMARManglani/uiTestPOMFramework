@@ -5,12 +5,88 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.interactions.Actions;
 import org.testng.Assert;
 import com.Dsci.SuiteBase.GenericLib;
 import com.Dsci.ReadPropertyFile.ReadPropertyFile;
 
 public class ProjectspecificFunctions extends GenericLib{
+	public String ExpectedPage1header = "Business Lookup";
 	public String ExpectedPage5header = "Coverages & Pricing" ;
+	 JavascriptHelper js1 = new JavascriptHelper(driver);
+	public void Bussinesslookup() throws FileNotFoundException, IOException 
+	{
+		  setImplicitWait(10,TimeUnit.SECONDS);
+		  // Verify the header
+		  WebElement  BussinessLookUpPageHeader =	getElementByXpath(ReadPropertyFile.ReadElementObjectRepo("BussinessLookUpPageHeader"));
+		  String actualheader =getElementText(BussinessLookUpPageHeader);
+		  Assert.assertEquals(actualheader,ExpectedPage1header ,"Header of page is not correct");
+		  
+		  // Enter the name of bussiness in search
+		  WebElement  SearchInput =	getElementByXpath(ReadPropertyFile.ReadElementObjectRepo("SearchInput"));
+		  SearchInput.sendKeys("Gateaux, Speer");
+		  
+		  WebElement  ListSearchBoxSelect =	getElementByXpath(ReadPropertyFile.ReadElementObjectRepo("ListSearchBoxSelect"));
+
+		  Actions act = new Actions(driver);
+		  act.moveToElement(ListSearchBoxSelect).click().build().perform();
+		  
+		  // Wait for Company details widget to load
+		  WebElement  AppassistContactDetailsWidget =	getElementByXpath(ReadPropertyFile.ReadElementObjectRepo("AppassistContactDetailsWidget"));
+
+		  WaitForElementVisibleWithPollingTime(AppassistContactDetailsWidget,20,5);
+		  AppassistContactDetailsWidget.click();
+		  
+		  // Click on tax widget
+		  WebElement  AppassistTaxwidget =	getElementByXpath(ReadPropertyFile.ReadElementObjectRepo("AppassistTaxwidget"));
+		  AppassistTaxwidget.click();
+		  
+		  // Implicit Wait for loader
+		  setImplicitWait(10,TimeUnit.SECONDS);
+		  //Enter suite 
+          WebElement  suite =	getElementByXpath(ReadPropertyFile.ReadElementObjectRepo("SuiteFloorTextBox"));
+          js1.scrollToElement(suite);
+
+          suite.clear();
+          suite.sendKeys("2nd Floor");
+
+           // Enter Year started
+          WebElement  Yearstarted =	getElementByXpath(ReadPropertyFile.ReadElementObjectRepo("YearstartedTextbox"));
+          js1.scrollToElement(Yearstarted);
+
+          Yearstarted.clear();
+          Yearstarted.sendKeys("2013");  
+          
+            // Enter Your First name
+          WebElement  FirstName =	getElementByXpath(ReadPropertyFile.ReadElementObjectRepo("YourFirstNameText"));
+          js1.scrollToElement(FirstName);
+          FirstName.clear();
+          FirstName.sendKeys("John");  
+           // Enter Your Last name      
+          WebElement  LastName =	getElementByXpath(ReadPropertyFile.ReadElementObjectRepo("YourLastNameText"));
+          LastName.clear();
+          LastName.sendKeys("Kimo"); 
+           // Enter No of employees
+          WebElement  NoOfEmployees =	getElementByXpath(ReadPropertyFile.ReadElementObjectRepo("NoofEmployeesText"));
+          NoOfEmployees.clear();
+          NoOfEmployees.sendKeys("15"); 
+          
+           // Enter the Partnership
+          WebElement  Legalentity =	getElementByXpath(ReadPropertyFile.ReadElementObjectRepo("LegalEntityauto"));
+          Legalentity.clear();
+          Legalentity.sendKeys("Partnership");  
+          //Select legal entity
+          WebElement  SelectPartnership =	getElementByXpath(ReadPropertyFile.ReadElementObjectRepo("LegalEntityTypeSelected"));
+          SelectPartnership.click();
+          // Click on continue
+          WebElement  BussinesslookupContinue =	getElementByXpath(ReadPropertyFile.ReadElementObjectRepo("BussinessLookUpContinueButton"));
+          js1.scrollToElement(BussinesslookupContinue);
+
+          BussinesslookupContinue.click();
+		  setImplicitWait(20,TimeUnit.SECONDS);
+		 		  
+		  
+	}
 
 	public void additionalInterstTillPayment() throws FileNotFoundException, IOException {
 		JavascriptHelper js1 = new JavascriptHelper(driver);
@@ -73,7 +149,7 @@ public class ProjectspecificFunctions extends GenericLib{
         WebElement  FinalPaymentAssertAmount =	getElementByXpath(ReadPropertyFile.ReadElementObjectRepo("FinalPaymentAssertAmount"));
         String ExpectedFinalPaymentAssertAmount =getElementText(FinalPaymentAssertAmount);
         Assert.assertEquals(actualPriceofPolicy, ExpectedFinalPaymentAssertAmount ,"Policy Pricing is not matched in pricing page & Final payment page");
-
+        
 		
 	}
 
