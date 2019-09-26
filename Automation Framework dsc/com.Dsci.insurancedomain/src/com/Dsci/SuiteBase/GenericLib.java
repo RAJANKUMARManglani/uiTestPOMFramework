@@ -31,16 +31,19 @@ public class GenericLib {
 	public  WebDriver driver;
 	Logger log;
 	public void setup(String browser) throws Exception{
+		String path = System.getProperty("user.dir");
+		System.out.println(path); 
+		
 		//Check if parameter passed from TestNG is 'firefox'
 		if(browser.equalsIgnoreCase("firefox")){
 		//create firefox instance
-			System.setProperty("webdriver.gecko.driver", "TestBrowsers/geckodriver.exe");
+			System.setProperty("webdriver.gecko.driver", path + "/TestBrowsers/geckodriver");
 			driver = new FirefoxDriver();
 		}
 		//Check if parameter passed as 'chrome'
 		else if(browser.equalsIgnoreCase("chrome")){
 			//set path to chromedriver.exe
-			System.setProperty("webdriver.chrome.driver","TestBrowsers/chromedriver.exe");
+			System.setProperty("webdriver.chrome.driver",path + "/TestBrowsers/chromedriver");
 			//create chrome instance
 			driver = new ChromeDriver();
 		}
