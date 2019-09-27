@@ -27,18 +27,27 @@ public class BOP extends GenericLib{
 	    @BeforeMethod
 
 	  public void setUp() throws Exception {
-		  setup("chrome");
+		  setup("Chrome");
 			driver= new GenericLib().driver;
 
-			  driver.get("https://solutions.mckinsey.com/dsci-qa/ef1d3125-0d84-4906-8a92-c2eb40f2c342?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhamFubTI3MS4xQGdtYWlsLmNvbSIsInRlbmFudCI6ImVmMWQzMTI1LTBkODQtNDkwNi04YTkyLWMyZWI0MGYyYzM0MiIsInNjb3BlIjoiTUFHSUNfTElOSyIsImlhdCI6MTU2OTQ5NTI0MSwiZXhwIjoxNTY5NzU0NDQxfQ.QhpgyXmQu84V-QTCEEXndhHAbzhNDUywfo_M5hKxEC4");
+			driver.get("https://developers.google.com/places/web-service/search");
+			 // driver.get("https://solutions.mckinsey.com/dsci-qa/ef1d3125-0d84-4906-8a92-c2eb40f2c342?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhamFubTI3MS4xQGdtYWlsLmNvbSIsInRlbmFudCI6ImVmMWQzMTI1LTBkODQtNDkwNi04YTkyLWMyZWI0MGYyYzM0MiIsInNjb3BlIjoiTUFHSUNfTElOSyIsImlhdCI6MTU2OTQ5NTI0MSwiZXhwIjoxNTY5NzU0NDQxfQ.QhpgyXmQu84V-QTCEEXndhHAbzhNDUywfo_M5hKxEC4");
 	  }
   @Test
   public void BOPTest() throws FileNotFoundException, IOException 
   
   {
 	// Call common function for Bussinesslook up page
-			ProjectspecificFunctions common = new ProjectspecificFunctions();
-			common.Bussinesslookup();
+		//	ProjectspecificFunctions common = new ProjectspecificFunctions();
+		//	common.Bussinesslookup();
+	  
+	  // Click on continue
+      WebElement  BussinesslookupContinue =	getElementByXpath(ReadPropertyFile.ReadElementObjectRepo("BussinessLookUpContinueButton"));
+      JavascriptHelper js1 = new JavascriptHelper(driver);
+      js1.scrollToElement(BussinesslookupContinue);
+
+      BussinesslookupContinue.click();
+	  setImplicitWait(20,TimeUnit.SECONDS);
 
       // Select No for Question 1 in Tell us about your business
       
