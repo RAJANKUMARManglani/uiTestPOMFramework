@@ -1,5 +1,6 @@
 package com.Dsci.SuiteBase;
 
+import java.net.URL;
 import java.time.Duration;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -13,13 +14,18 @@ import org.openqa.selenium.ElementNotVisibleException;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.NoSuchFrameException;
 import org.openqa.selenium.StaleElementReferenceException;
+import org.openqa.selenium.UnexpectedAlertBehaviour;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
+import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.edge.EdgeDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
 import org.openqa.selenium.ie.InternetExplorerDriver;
 import org.openqa.selenium.interactions.Actions;
+import org.openqa.selenium.remote.CapabilityType;
+import org.openqa.selenium.remote.DesiredCapabilities;
+import org.openqa.selenium.remote.RemoteWebDriver;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.FluentWait;
 import org.openqa.selenium.support.ui.Select;
@@ -30,7 +36,7 @@ public class GenericLib {
 	
 	public  WebDriver driver;
 	Logger log;
-	public void setup(String browser) throws Exception{
+	public WebDriver setup(String browser) throws Exception{
 		String path = System.getProperty("user.dir");
 		System.out.println(path); 
 		
@@ -42,10 +48,41 @@ public class GenericLib {
 		}
 		//Check if parameter passed as 'chrome'
 		else if(browser.equalsIgnoreCase("chrome")){
-			//set path to chromedriver.exe
-			System.setProperty("webdriver.chrome.driver",path + "/TestBrowsers/chromedriver");
-			//create chrome instance
-			driver = new ChromeDriver();
+			
+			
+			try { 
+		    	  System.setProperty("webdriver.http.factory", "apache");
+		    	//set path to chromedriver.exe
+					System.setProperty("webdriver.chrome.driver",path + "/TestBrowsers/chromedriver");
+					ChromeOptions options = new ChromeOptions();
+					options.addArguments("chrome.switches","--disable-extensions");
+					new DesiredCapabilities();
+					DesiredCapabilities caps = DesiredCapabilities.chrome();
+					caps.setCapability(ChromeOptions.CAPABILITY, options);
+					caps.setCapability(CapabilityType.UNEXPECTED_ALERT_BEHAVIOUR,
+			                  UnexpectedAlertBehaviour.IGNORE);
+					Map<String, Object> prefs = new HashMap<String, Object>();
+				
+					prefs.put("profile.default_content_settings.popups", 0);
+					prefs.put("download.prompt_for_download", "false");
+					
+					prefs.put("credentials_enable_service", false);
+					prefs.put("profile.password_manager_enabled", false);
+					options.setExperimentalOption("prefs", prefs);
+			
+					driver = new ChromeDriver(caps);
+					driver.manage().window().maximize();
+					return driver;	
+					
+		      } 
+
+		      catch (Exception ex) { 
+		        ex.printStackTrace();
+		    	  throw new RuntimeException
+		              ("couldnt create chrome driver"); 
+		      } 
+			
+			
 		}
 		//Check if parameter passed as 'Edge'
 				else if(browser.equalsIgnoreCase("Edge")){
@@ -65,6 +102,8 @@ public class GenericLib {
 			throw new Exception("Browser is not correct");
 		}
 		driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+		
+		return driver;
 	}
 	
 
