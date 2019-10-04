@@ -16,12 +16,15 @@ public class ReadPropertyFile {
 		System.getProperty("user.dir");
 		
 		//Create object of FileInputStream and give property file location as fileInputStream parameter (which property file is to be read)
+		String path = System.getProperty("user.dir");
+		System.out.println(path); 
 		
-		FileInputStream ip= new FileInputStream("com.Dsci.insurancedomain/Resources/Object.property");
+		
+		FileInputStream ip= new FileInputStream(path + "/Resources/Object.property");
 		// Load the file
 		prop.load(ip);
 
-		System.out.println(prop.getProperty(object));
+		//System.out.println(prop.getProperty(object));
 		
        return prop.getProperty(object);
 	}
