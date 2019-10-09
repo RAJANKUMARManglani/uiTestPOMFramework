@@ -6,18 +6,16 @@ import org.testng.Assert;
 import com.Dsci.ReadPropertyFile.ReadPropertyFile;
 import com.Dsci.SuiteBase.GenericLib;
 import com.Dsci.SuiteBase.JavascriptHelper;
-import com.Dsci.SuiteBase.ProjectspecificFunctions;
-
 import org.testng.annotations.BeforeTest;
-
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
+
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterTest;
-import org.testng.annotations.BeforeMethod;
 
 public class WorkerCompensation extends GenericLib{
 	public String ExpectedPage1header = "Tell us about your business";
@@ -27,7 +25,7 @@ public class WorkerCompensation extends GenericLib{
 	public String ExpectedPage5header = "Coverages & Pricing" ;
 
 	 WebDriver driver;
-   @BeforeMethod
+   @BeforeTest
 
  public void setUp() throws Exception {
         // setup("chrome");
@@ -40,12 +38,14 @@ public class WorkerCompensation extends GenericLib{
             // Instantiate a ChromeDriver class.     
        WebDriver driver=new ChromeDriver();  
          
-          // Launch Website  
-driver.get("https://solutions.mckinsey.com/dsci-qa/ef1d3125-0d84-4906-8a92-c2eb40f2c342?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhamFubTI3LjExQGdtYWlsLmNvbSIsInRlbmFudCI6ImVmMWQzMTI1LTBkODQtNDkwNi04YTkyLWMyZWI0MGYyYzM0MiIsInNjb3BlIjoiTUFHSUNfTElOSyIsImlhdCI6MTU3MDE2NzY0OCwiZXhwIjoxNTcwNDI2ODQ4fQ.hCqPPOCKQ1mWhI_v-DEaOWFxUviuXQWCDgF8Q3SpAgk");         
+          // Launch Website 
+       driver.get("https://dsc.mvp01.dev.nvt.mckinsey.cloud/dsci/ef1d3125-0d84-4906-8a92-c2eb40f2c342?token=eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InJhamFubTIuNzExQGdtYWlsLmNvbSIsInRlbmFudCI6ImVmMWQzMTI1LTBkODQtNDkwNi04YTkyLWMyZWI0MGYyYzM0MiIsInNjb3BlIjoiTUFHSUNfTElOSyIsImlhdCI6MTU3MDYwNjUxOSwiZXhwIjoxNTcwODY1NzE5fQ.cY_fULRrOUHWhDmBiO9QZcOvVwJZ4stX9JJMXzPkl6g");
         //Maximize the browser  
-         driver.manage().window().maximize();  
+         driver.manage().window().maximize();
+         driver.manage().timeouts().pageLoadTimeout(40, TimeUnit.SECONDS);
+         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+   }
 
- }
 
 	@Test
 	  public void WorkerCompensationTest() throws FileNotFoundException, IOException 
@@ -53,10 +53,10 @@ driver.get("https://solutions.mckinsey.com/dsci-qa/ef1d3125-0d84-4906-8a92-c2eb4
 		// Call common function for Bussinesslook up page
 	//	ProjectspecificFunctions common = new ProjectspecificFunctions();
 	//	common.Bussinesslookup();
-	      setImplicitWait(20,TimeUnit.SECONDS);
+	    //  setImplicitWait(20,TimeUnit.SECONDS);
 
 		  // Click on continue
-	      WebElement  BussinesslookupContinue =	getElementByXpath(ReadPropertyFile.ReadElementObjectRepo("BussinessLookUpContinueButton"));
+	      WebElement  BussinesslookupContinue =	driver.findElement(By.xpath((ReadPropertyFile.ReadElementObjectRepo("BussinessLookUpContinueButton"))));
 	      JavascriptHelper js1 = new JavascriptHelper(driver);
 	      js1.scrollToElement(BussinesslookupContinue);
 	      JavascriptHelper obj = new JavascriptHelper(driver);
@@ -270,15 +270,14 @@ driver.get("https://solutions.mckinsey.com/dsci-qa/ef1d3125-0d84-4906-8a92-c2eb4
                    Assert.assertEquals(actualPriceofPolicy, ExpectedFinalPaymentAssertAmount ,"Policy Pricing is not matched in pricing page & Final payment page");
 		
 	 }
-	
-	
+  
   
   @AfterTest
-  public void afterTest() {
+  public void teardown() {
 	  
 	  // close the browser
       driver.quit();
 
   }
 
-}
+} 
